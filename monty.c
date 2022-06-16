@@ -11,32 +11,32 @@
  */
 int main(int argc, char **argv)
 {
-	FILE *fd;
+	FILE *file_desc;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	fd = fopen(argv[1], "r");
-	if (!fd)
+	file_desc = fopen(argv[1], "r");
+	if (!file_desc)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	read_file(fd, argv[1]);
+	read_file(file_desc, argv[1]);
 	return (EXIT_SUCCESS);
 }
 /**
  * read_file - Read and get the command
- * @fd: Number of arguments
+ * @file_desc: Number of arguments
  * @file_name: File name
  *
  * Description: Read and get the command
  * for the program interpreter.
  * Return: Nothing.
  */
-void read_file(FILE *fd, char *file_name)
+void read_file(FILE *file_desc, char *file_name)
 {
 	int n_line = 1;
 	size_t size_buf = 1;
@@ -45,7 +45,7 @@ void read_file(FILE *fd, char *file_name)
 	stack_t *stack = NULL;
 	(void) file_name;
 
-	while (getline(&buffer, &size_buf, fd) != -1)
+	while (getline(&buffer, &size_buf, file_desc) != -1)
 	{
 		opcode = strtok(buffer, delim);
 		if (!opcode || opcode[0] == '#')
@@ -64,7 +64,7 @@ void read_file(FILE *fd, char *file_name)
 	}
 	free(buffer);
 	free_dlistint(stack);
-	fclose(fd);
+	fclose(file_desc);
 }
 
 /**

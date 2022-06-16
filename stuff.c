@@ -10,11 +10,11 @@
 void mop_push(stack_t **stack, unsigned int n_line)
 {
 	stack_t *node;
-	char delim[] = " \n\t";
+	char dlm[] = " \n\t";
 	char *s;
 	int num, flag, sign = 1;
 
-	s = strtok(NULL, delim);
+	s = strtok(NULL, dlm);
 	if (!s)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", n_line);
